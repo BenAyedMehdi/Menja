@@ -38,7 +38,7 @@ export default function AccountPopover() {
   };
 
   const handleLogout = () => {
-    navigate('/login', { replace: true });
+    navigate('/', { replace: true });
   };
   return (
     <>

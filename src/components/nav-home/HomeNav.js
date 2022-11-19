@@ -82,12 +82,9 @@ export default function HomeNav() {
             }}
             href="register"
           >
-            Register
+            Demo
           </Button>
 
-          <Button color="secondary" variant="outlined" href="login">
-            Login
-          </Button>
         </Stack>
       </Toolbar>
     </AppBar>

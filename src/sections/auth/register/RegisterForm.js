@@ -14,7 +14,7 @@ export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    navigate('/add-company', { replace: true });
+    navigate('/dashboard', { replace: true });
   };
 
   return (
@@ -54,7 +54,7 @@ export default function RegisterForm() {
       </Stack>
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-        Register
+        Next
       </LoadingButton>
     </>
   );

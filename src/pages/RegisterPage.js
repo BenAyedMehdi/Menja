@@ -67,7 +67,7 @@ export default function RegisterPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Register 
+              Register Page (Just press 'Next' button)
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>

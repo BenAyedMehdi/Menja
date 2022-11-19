@@ -46,8 +46,9 @@ export default function MilestonesPage() {
   });
 
   useEffect(() => {
+    /*
     if (user === '') {
-      navigate('/home', { replace: true });
+      navigate('/', { replace: true });
     }
     const getMilestones = async () => {
       const milestonesFromServer = await apiCalls.GetCompanyMilestones(user.company.companyId);
@@ -55,13 +56,14 @@ export default function MilestonesPage() {
       console.log('milestones', milestonesFromServer);
     };
     getMilestones();
-
+    
     const getProducts = async () => {
       const productsFromServer = await apiCalls.GetCompanyProducts(user.company.companyId);
       setProducts(productsFromServer);
       console.log('Products', productsFromServer);
     };
     getProducts();
+    */
   }, []);
 
   const PRODUCTS = products.map((p, index) => {
@@ -94,24 +96,48 @@ export default function MilestonesPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
+          Hi, Welcome back to your smart sustainable farm
         </Typography>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Productions (kg)" total={14} icon={'ant-design:android-filled'} />
-          </Grid>
+          <Grid item xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader title="My progress in numbers" />
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <AppWidgetSummary title="Weekly Productions (kg)" total={14} icon={'ant-design:android-filled'} />
+                  </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Plant types produced" total={38} color="info" icon={'ant-design:apple-filled'} />
-          </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <AppWidgetSummary
+                      title="Plant types produced"
+                      total={38}
+                      color="info"
+                      icon={'ant-design:apple-filled'}
+                    />
+                  </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="CO2 Emission saved" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
-          </Grid>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <AppWidgetSummary
+                      title="CO2 Emission saved"
+                      total={1723315}
+                      color="warning"
+                      icon={'ant-design:windows-filled'}
+                    />
+                  </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Money saved (in HUF)" total={23000} color="error" icon={'ant-design:bug-filled'} />
+                  <Grid item xs={12} sm={6} md={3}>
+                    <AppWidgetSummary
+                      title="Money saved (in HUF)"
+                      total={23000}
+                      color="error"
+                      icon={'ant-design:bug-filled'}
+                    />
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
           </Grid>
           <Grid item xs={12} md={8} lg={8}>
             <Card>
@@ -124,7 +150,7 @@ export default function MilestonesPage() {
                 }
               />
               <CardContent>
-                <ProductList products={pots.filter((p,index)=> index<3)} />
+                <ProductList products={pots.filter((p, index) => index < 3)} />
               </CardContent>
             </Card>
           </Grid>
@@ -133,19 +159,20 @@ export default function MilestonesPage() {
               title="Progress"
               list={[...Array(5)].map((_, index) => ({
                 id: faker.datatype.uuid(),
-                title: ['Buy one or more pots', 'Download the app', 'Connect to your pots', 'Plant crops', 'Monitor progress'][
-                  index
-                ],
+                title: [
+                  'Buy one or more pots',
+                  'Download the app',
+                  'Connect to your pots',
+                  'Plant crops',
+                  'Monitor progress',
+                ][index],
                 type: `order${index + 1}`,
                 time: faker.date.past(),
               }))}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={8}>
-            <AppNewsUpdate
-              title="My products"
-              list={veggies}
-            />
+            <AppNewsUpdate title="My products" list={veggies} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -160,8 +187,6 @@ export default function MilestonesPage() {
               }))}
             />
           </Grid>
-
-          
         </Grid>
       </Container>
     </>

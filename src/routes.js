@@ -25,13 +25,20 @@ export default function Router() {
     {
       path: '/',
       element: <HomePage />,
-      children: [
-        { element: <Navigate to="/home" />, index: true },
-        {
-          path: 'contact',
-          element: <ContactsPage />,
-        },
-      ],
+      children: [{ element: <Navigate to="/home" />, index: true }],
+    },
+    {
+      path: 'contact',
+      element: <ContactsPage />,
+    },
+
+    {
+      path: 'login',
+      element: <LoginPage />,
+    },
+    {
+      path: 'register',
+      element: <RegisterPage />,
     },
     {
       path: 'dashboard',
@@ -47,19 +54,6 @@ export default function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
-    },
-    {
-      path: 'home',
-      element: <HomePage />,
-    },
-
-    {
-      path: 'login',
-      element: <LoginPage />,
-    },
-    {
-      path: 'register',
-      element: <RegisterPage />,
     },
     {
       path: 'add-company',
