@@ -8,8 +8,8 @@ import { useTheme } from '@mui/material/styles';
 import { Card, CardHeader, CardContent, Box, Stack, Button, Grid, Container, Typography } from '@mui/material';
 import apiCalls from '../api/apiCalls';
 import AddProductDialog from '../components/dialog/AddProductDialog';
-  // components
-  import Iconify from '../components/iconify';
+// components
+import Iconify from '../components/iconify';
 // sections
 import {
   AppTasks,
@@ -23,6 +23,9 @@ import {
   AppConversionRates,
 } from '../sections/@dashboard/app';
 import { ProductList } from '../sections/@dashboard/products';
+
+import pots from '../_mock/pots';
+import veggies from '../_mock/veggies';
 
 const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
 
@@ -86,7 +89,7 @@ export default function MilestonesPage() {
   return (
     <>
       <Helmet>
-        <title> Takeoff</title>
+        <title> Menja</title>
       </Helmet>
 
       <Container maxWidth="xl">
@@ -95,6 +98,56 @@ export default function MilestonesPage() {
         </Typography>
 
         <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Weekly Productions (kg)" total={14} icon={'ant-design:android-filled'} />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Plant types produced" total={38} color="info" icon={'ant-design:apple-filled'} />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="CO2 Emission saved" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Money saved (in HUF)" total={23000} color="error" icon={'ant-design:bug-filled'} />
+          </Grid>
+          <Grid item xs={12} md={8} lg={8}>
+            <Card>
+              <CardHeader
+                title="My pots"
+                action={
+                  <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+                    Buy a New Pot
+                  </Button>
+                }
+              />
+              <CardContent>
+                <ProductList products={pots.filter((p,index)=> index<3)} />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <AppOrderTimeline
+              title="Progress"
+              list={[...Array(5)].map((_, index) => ({
+                id: faker.datatype.uuid(),
+                title: ['Buy one or more pots', 'Download the app', 'Connect to your pots', 'Plant crops', 'Monitor progress'][
+                  index
+                ],
+                type: `order${index + 1}`,
+                time: faker.date.past(),
+              }))}
+            />
+          </Grid>
+          <Grid item xs={12} md={6} lg={8}>
+            <AppNewsUpdate
+              title="My products"
+              list={veggies}
+            />
+          </Grid>
+
           <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate
               title="My milestones"
@@ -108,79 +161,7 @@ export default function MilestonesPage() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
-            <AppOrderTimeline
-              title="Progress"
-              list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: ['Lauch company', 'Go live', 'Secure an investment', 'Marketing compain', 'Improve feautures'][
-                  index
-                ],
-                type: `order${index + 1}`,
-                time: faker.date.past(),
-              }))}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppTasks
-              title="My tasks"
-              list={[
-                { id: '1', label: 'Create FireStone Logo' },
-                { id: '2', label: 'Add SCSS and JS files if required' },
-                { id: '3', label: 'Stakeholder Meeting' },
-                { id: '4', label: 'Scoping & Estimations' },
-                { id: '5', label: 'Sprint Showcase' },
-              ]}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardHeader title="Upgrade" />
-              <CardContent>
-                <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-                  <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
-                    <Box
-                      component="img"
-                      src="/assets/illustrations/illustration_avatar.png"
-                      sx={{ width: 100, position: 'absolute', top: -50 }}
-                    />
-
-                    <Box sx={{ textAlign: 'center' }}>
-                      <Typography gutterBottom variant="h6">
-                        Get more?
-                      </Typography>
-
-                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        From only $169
-                      </Typography>
-                    </Box>
-
-                    <Button target="_blank" variant="contained">
-                      Upgrade to Gold
-                    </Button>
-                  </Stack>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={12} lg={12}>
-            <Card>
-              <CardHeader
-                title="My products"
-                action={
-                  <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-                    New Product
-                  </Button>
-                }
-              />
-              <CardContent>
-                <AddProductDialog />
-                <ProductList products={PRODUCTS} />
-              </CardContent>
-            </Card>
-          </Grid>
+          
         </Grid>
       </Container>
     </>

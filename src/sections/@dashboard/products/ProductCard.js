@@ -72,7 +72,7 @@ export default function ShopProductCard({ product }) {
               {priceSale && fCurrency(priceSale)}
             </Typography>
             &nbsp;
-            {(price)}
+            {(price)} % used
           </Typography>
         </Stack>
       </Stack>

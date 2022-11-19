@@ -23,7 +23,18 @@ import ContactsPage from './pages/ContactsPage';
 export default function Router() {
   const routes = useRoutes([
     {
-      path: '/dashboard',
+      path: '/',
+      element: <HomePage />,
+      children: [
+        { element: <Navigate to="/home" />, index: true },
+        {
+          path: 'contact',
+          element: <ContactsPage />,
+        },
+      ],
+    },
+    {
+      path: 'dashboard',
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
@@ -33,7 +44,6 @@ export default function Router() {
         { path: 'products', element: <AllProductsPage /> },
         { path: 'companies', element: <CompaniesPage /> },
 
-
         { path: 'user', element: <UserPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
@@ -42,21 +52,18 @@ export default function Router() {
       path: 'home',
       element: <HomePage />,
     },
-    {
-      path: 'contact',
-      element: <ContactsPage />,
-    },
+
     {
       path: 'login',
       element: <LoginPage />,
     },
     {
       path: 'register',
-      element: <RegisterPage/>,
+      element: <RegisterPage />,
     },
     {
       path: 'add-company',
-      element: <AddCompanyPage/>,
+      element: <AddCompanyPage />,
     },
     {
       element: <SimpleLayout />,
