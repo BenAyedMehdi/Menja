@@ -3,6 +3,7 @@ import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 // @mui
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Card,
@@ -24,6 +25,7 @@ import {
   TableContainer,
   TablePagination,
   CardContent,
+  CardHeader,
 } from '@mui/material';
 // components
 import PackageDetails from '../sections/@dashboard/app/PackageDetails';
@@ -32,8 +34,20 @@ import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
+import {
+  AppTasks,
+  AppNewsUpdate,
+  AppOrderTimeline,
+  AppCurrentVisits,
+  AppWebsiteVisits,
+  AppTrafficBySite,
+  AppWidgetSummary,
+  AppCurrentSubject,
+  AppConversionRates,
+} from '../sections/@dashboard/app';
 // mock
 import USERLIST from '../_mock/report';
+import veggies from '../_mock/veggies';
 
 // ----------------------------------------------------------------------
 
@@ -77,6 +91,8 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function ReportsPage() {
+  const theme = useTheme();
+
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -152,111 +168,197 @@ export default function ReportsPage() {
   return (
     <>
       <Helmet>
-        <title> Reports - Takeoff </title>
+        <title> Predictions </title>
       </Helmet>
 
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Reports
+            Predictions
           </Typography>
-          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Report
-          </Button>
         </Stack>
 
-        <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} lg={4}>
+            <AppCurrentSubject
+              title="Future market needs"
+              chartLabels={veggies.map((v)=>v.title)}
+              chartData={[
+                { name: '2022', data: [80, 50, 30, 40, 100, 20] },
+                { name: '2023', data: [20, 30, 40, 80, 20, 80] },
+                { name: '2024', data: [44, 76, 78, 13, 43, 10] },
+              ]}
+              chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
+            />
+          </Grid>
+          <Grid item xs={12} md={6} lg={8}>
+            <AppWebsiteVisits
+              title="The past, the present, the future"
+              subheader="(+43%) than last year"
+              chartLabels={[
+                '01/01/2017',
+                '02/01/2018',
+                '03/01/2019',
+                '04/01/2020',
+                '05/01/2021',
+                '06/01/2022',
+                '07/01/2023',
+                '08/01/2024',
+                '09/01/2025',
+                '10/01/2026',
+                '11/01/2027',
+              ]}
+              chartData={[
+                {
+                  name: 'Production',
+                  type: 'column',
+                  fill: 'solid',
+                  data: [0, 0, 0, 0, 0, 22, 37, 21,32, 30, 70],
+                },
+                {
+                  name: 'CO2 emission',
+                  type: 'area',
+                  fill: 'gradient',
+                  data: [44, 55, 41, 67, 22, 43, 21, 20, 11, 17, 8],
+                },
+                {
+                  name: 'Market size',
+                  type: 'line',
+                  fill: 'solid',
+                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 48, 80],
+                },
+              ]}
+            />
+          </Grid>
+          <Grid item xs={12} md={8} lg={4}>
+            <AppTrafficBySite
+              title="Expected Sites Traffic by 2023"
+              list={[
+                {
+                  name: 'FaceBook',
+                  value: 323234,
+                  icon: <Iconify icon={'eva:facebook-fill'} color="#1877F2" width={32} />,
+                },
+                {
+                  name: 'Google',
+                  value: 341212,
+                  icon: <Iconify icon={'eva:google-fill'} color="#DF3E30" width={32} />,
+                },
+                {
+                  name: 'Linkedin',
+                  value: 411213,
+                  icon: <Iconify icon={'eva:linkedin-fill'} color="#006097" width={32} />,
+                },
+                {
+                  name: 'Twitter',
+                  value: 443232,
+                  icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} />,
+                },
+              ]}
+            />
+          </Grid>
 
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const selectedUser = selected.indexOf(name) !== -1;
+          <Grid item xs={12} md={12} lg={8}>
+            <Card>
+              <CardHeader title="Performance Reports" />
+              <UserListToolbar
+                numSelected={selected.length}
+                filterName={filterName}
+                onFilterName={handleFilterByName}
+              />
 
-                    return (
-                      <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
-                        </TableCell>
+              <Scrollbar>
+                <TableContainer sx={{ minWidth: 800 }}>
+                  <Table>
+                    <UserListHead
+                      order={order}
+                      orderBy={orderBy}
+                      headLabel={TABLE_HEAD}
+                      rowCount={USERLIST.length}
+                      numSelected={selected.length}
+                      onRequestSort={handleRequestSort}
+                      onSelectAllClick={handleSelectAllClick}
+                    />
+                    <TableBody>
+                      {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                        const selectedUser = selected.indexOf(name) !== -1;
 
-                        <TableCell component="th" scope="row" padding="none">
-                          <Typography variant="subtitle2" noWrap>
-                            {name}
-                          </Typography>
-                        </TableCell>
+                        return (
+                          <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                            <TableCell padding="checkbox">
+                              <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
+                            </TableCell>
 
-                        <TableCell align="left">{company}</TableCell>
+                            <TableCell component="th" scope="row" padding="none">
+                              <Typography variant="subtitle2" noWrap>
+                                {name}
+                              </Typography>
+                            </TableCell>
 
-                        <TableCell align="left">{role}</TableCell>
+                            <TableCell align="left">{company}</TableCell>
 
-                        <TableCell align="left">
-                          <Label color={(status === 'no' && 'error') || 'success'}>{sentenceCase(status)}</Label>
-                        </TableCell>
+                            <TableCell align="left">{role}</TableCell>
 
-                        <TableCell align="right">
-                          <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
-                            <Iconify icon={'eva:more-vertical-fill'} />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
+                            <TableCell align="left">
+                              <Label color={(status === 'no' && 'error') || 'success'}>{sentenceCase(status)}</Label>
+                            </TableCell>
 
-                {isNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <Paper
-                          sx={{
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="h6" paragraph>
-                            Not found
-                          </Typography>
+                            <TableCell align="right">
+                              <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
+                                <Iconify icon={'eva:more-vertical-fill'} />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                      {emptyRows > 0 && (
+                        <TableRow style={{ height: 53 * emptyRows }}>
+                          <TableCell colSpan={6} />
+                        </TableRow>
+                      )}
+                    </TableBody>
 
-                          <Typography variant="body2">
-                            No results found for &nbsp;
-                            <strong>&quot;{filterName}&quot;</strong>.
-                            <br /> Try checking for typos or using complete words.
-                          </Typography>
-                        </Paper>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+                    {isNotFound && (
+                      <TableBody>
+                        <TableRow>
+                          <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                            <Paper
+                              sx={{
+                                textAlign: 'center',
+                              }}
+                            >
+                              <Typography variant="h6" paragraph>
+                                Not found
+                              </Typography>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={USERLIST.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
+                              <Typography variant="body2">
+                                No results found for &nbsp;
+                                <strong>&quot;{filterName}&quot;</strong>.
+                                <br /> Try checking for typos or using complete words.
+                              </Typography>
+                            </Paper>
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    )}
+                  </Table>
+                </TableContainer>
+              </Scrollbar>
+
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={USERLIST.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Card>
+          </Grid>
+          
+        </Grid>
       </Container>
 
       <Popover
@@ -288,41 +390,6 @@ export default function ReportsPage() {
         </MenuItem>
       </Popover>
 
-      <Grid marginTop={3} container spacing={3}>
-        <Grid item xs={12} sm={6} md={6}>
-          <PackageDetails title="Weekly Sales" total="hi" icon={'ant-design:android-filled'} />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={6}>
-          <Card>
-            <CardContent>
-              <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-                <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
-                  <Box
-                    component="img"
-                    src="/assets/illustrations/illustration_avatar.png"
-                    sx={{ width: 100, position: 'absolute', top: -50 }}
-                  />
-
-                  <Box sx={{ textAlign: 'center' }}>
-                    <Typography gutterBottom variant="h6">
-                      Get more?
-                    </Typography>
-
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      From only $169
-                    </Typography>
-                  </Box>
-
-                  <Button target="_blank" variant="contained">
-                    Upgrade to Gold
-                  </Button>
-                </Stack>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
     </>
   );
 }

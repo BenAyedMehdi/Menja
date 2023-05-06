@@ -54,7 +54,7 @@ export default function HomeNav() {
     <AppBar color="inherit" position="relative">
       <Toolbar>
         <Box >
-          <Logo dest="/home"/>
+          <Logo dest="/"/>
         </Box>
         <Typography variant="h3" sx={{ px: 2}}>
           Menja
@@ -63,10 +63,10 @@ export default function HomeNav() {
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" spacing={2}>
-          <Button color="success" variant="text">
+          <Button color="success" variant="text" href="products">
             Products
           </Button>
-          <Button color="success" variant="text">
+          <Button color="success" variant="text" href="pricing">
             Pricing
           </Button>
           <Button color="success" variant="text" href="contact">
@@ -80,7 +80,7 @@ export default function HomeNav() {
               fontSize: '14px',
               fontWeight: 'bold',
             }}
-            href="register"
+            href="dashboard"
           >
             Demo
           </Button>

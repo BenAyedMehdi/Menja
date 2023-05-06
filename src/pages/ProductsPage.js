@@ -33,11 +33,9 @@ export default function ProductsPage() {
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-            <ProductFilterSidebar
-              openFilter={openFilter}
-              onOpenFilter={handleOpenFilter}
-              onCloseFilter={handleCloseFilter}
-            />
+          <Grid item xs={12} md={6} lg={8}>
+            <AppNewsUpdate title="My products" list={veggies} />
+          </Grid>
             <ProductSort />
           </Stack>
         </Stack>

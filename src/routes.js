@@ -17,6 +17,8 @@ import AnalyticsPage from './pages/AnalyticsPage';
 import HomePage from './pages/HomePage';
 import AddCompanyPage from './pages/AddCompanyPage';
 import ContactsPage from './pages/ContactsPage';
+import OurProductsPage from './pages/OurProductsPage';
+import ProductIdeaPage from './pages/ProductIdeaPage';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +32,14 @@ export default function Router() {
     {
       path: 'contact',
       element: <ContactsPage />,
+    },
+    {
+      path: 'pricing',
+      element: <OurProductsPage />,
+    },
+    {
+      path: 'products',
+      element: <ProductIdeaPage />,
     },
 
     {

@@ -31,7 +31,7 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Box sx={{ p: 2, textAlign: 'left' }}>
           <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Milestone
+            New Product
           </Button>
         </Box>
         <Box sx={{ p: 2, textAlign: 'right' }}>

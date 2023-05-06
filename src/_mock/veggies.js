@@ -4,22 +4,24 @@ import { sample } from 'lodash';
 // ----------------------------------------------------------------------
 
 const PRODUCT_NAME = [
-  'Tomatp',
+  'Tomato',
   'Lettuce',
   'Beans',
   'Onion',
+  'Garlic',
   'Paprika',
+  'Cucumber',
 ];
 const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
 
 // ----------------------------------------------------------------------
 
-const products = [...Array(5)].map((_, index) => {
+const products = [...Array(6)].map((_, index) => {
   const setIndex = index + 1;
 
   return {
     id: faker.datatype.uuid(),
-    image: `/assets/images/pots/pot_${setIndex}.webp`,
+    image: `/assets/images/avatars/avatar_${setIndex}.jpg`,
     title: PRODUCT_NAME[index],
     description: PRODUCT_NAME[index],
     postedAt: faker.date.recent(),

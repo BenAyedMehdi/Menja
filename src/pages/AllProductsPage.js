@@ -5,8 +5,20 @@ import { Container, Stack, Typography } from '@mui/material';
 import apiCalls from '../api/apiCalls'
 // components
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import {
+  AppTasks,
+  AppNewsUpdate,
+  AppOrderTimeline,
+  AppCurrentVisits,
+  AppWebsiteVisits,
+  AppTrafficBySite,
+  AppWidgetSummary,
+  AppCurrentSubject,
+  AppConversionRates,
+} from '../sections/@dashboard/app';
 // mock
 import PRODUCTS from '../_mock/allProducts';
+import veggies from '../_mock/veggies';
 
 // ----------------------------------------------------------------------
 
@@ -62,7 +74,7 @@ export default function AllProductsPage() {
   return (
     <>
       <Helmet>
-        <title> Explore products </title>
+        <title> My products </title>
       </Helmet>
 
       <Container>
@@ -81,7 +93,8 @@ export default function AllProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={allProducts} />
+        
+        <AppNewsUpdate title="My products" list={veggies} />
         <ProductCartWidget />
       </Container>
     </>

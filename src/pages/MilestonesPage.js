@@ -91,7 +91,7 @@ export default function MilestonesPage() {
   return (
     <>
       <Helmet>
-        <title> Menja</title>
+        <title> Dashboard</title>
       </Helmet>
 
       <Container maxWidth="xl">
@@ -171,22 +171,9 @@ export default function MilestonesPage() {
               }))}
             />
           </Grid>
-          <Grid item xs={12} md={6} lg={8}>
-            <AppNewsUpdate title="My products" list={veggies} />
-          </Grid>
+          
 
-          <Grid item xs={12} md={6} lg={8}>
-            <AppNewsUpdate
-              title="My milestones"
-              list={[...Array(milestones.length)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: milestones[index].milestoneName,
-                description: '',
-                image: `/assets/images/covers/cover_${index + 1}.jpg`,
-                postedAt: faker.date.recent(),
-              }))}
-            />
-          </Grid>
+          
         </Grid>
       </Container>
     </>

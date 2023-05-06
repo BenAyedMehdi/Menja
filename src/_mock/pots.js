@@ -4,9 +4,9 @@ import { sample } from 'lodash';
 // ----------------------------------------------------------------------
 
 const PRODUCT_NAME = [
-  'Indoor Hydroponic garden',
-  'Outdoor Hydroponic garden',
-  'Indoor Hydroponic pot',
+  'Horizental pots indoor',
+  'Vertical pots indoor',
+  'Outdoor pots',
 ];
 const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
 
@@ -17,7 +17,7 @@ const products = [...Array(3)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/assets/images/pots/pot_${setIndex}.webp`,
+    cover: `/assets/images/pots/pot_${setIndex}.jpg`,
     name: PRODUCT_NAME[index],
     price: faker.datatype.number({ min: 50, max: 99, precision: 1 }),
     colors:
@@ -28,7 +28,7 @@ const products = [...Array(3)].map((_, index) => {
       (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
       (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
       PRODUCT_COLOR,
-    status: sample(['sale', 'new', '', '']),
+    status: sample(['', 'new', '', '']),
   };
 });
 
